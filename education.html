@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduPathway — Career & Higher Education Navigator</title>
+  <meta name="description" content="A complete comprehensive guide to the education system, streams, benefits, and career paths after 10th and 12th standard." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ──────────────────────────────────────────────
+       EduPathway Core Design System (Dark Black & 3D)
+       ────────────────────────────────────────────── */
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-black:      #000000;
+      --bg-surface:    #07080f;
+      --bg-panel:      rgba(10, 12, 24, 0.85);
+      --bg-hover:      rgba(255, 255, 255, 0.04);
+      --border:        rgba(255, 255, 255, 0.06);
+      --border-accent: rgba(99, 102, 241, 0.25);
+      
+      --text-main:     #f8fafc;
+      --text-secondary:#94a3b8;
+      --text-muted:    #57657a;
+      
+      /* Vibrant Glow Palettes */
+      --sci-glow:      #06b6d4; /* Science - Cyan */
+      --comm-glow:     #10b981; /* Commerce - Emerald */
+      --arts-glow:     #ec4899; /* Arts - Pink */
+      --voc-glow:      #f59e0b; /* Vocational - Amber */
+      
+      --primary:       #6366f1; /* Indigo */
+      --primary-glow:  rgba(99, 102, 241, 0.15);
+      --radius:        20px;
+      --radius-sm:     12px;
+      --transition:    all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      --font-body:     'Plus Jakarta Sans', sans-serif;
+      --font-display:  'Space Grotesk', sans-serif;
+    }
+
+    body {
+      background: var(--bg-black);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      perspective: 1200px;
+    }
+
+    /* ──── Animated Constellation Canvas Backdrop ──── */
+    #bgCanvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -2;
+      background: #000;
+      pointer-events: none;
+    }
+
+    /* ══════════════════════════════════════════════
+       TYPOGRAPHY & UTILITIES (Flexbox Driven)
+       ══════════════════════════════════════════════ */
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      background: var(--primary-glow);
+      color: #a5b4fc;
+      border: 1px solid var(--border-accent);
+      margin-bottom: 16px;
+    }
+
+    /* ══════════════════════════════════════════════
+       SLOW REVEAL SCROLL EFFECTS
+       ══════════════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ══════════════════════════════════════════════
+       HERO SECTION
+       ══════════════════════════════════════════════ */
+    .hero {
+      text-align: center;
+      padding: 120px 0 80px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-title {
+      font-size: 56px;
+      line-height: 1.15;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #ffffff 40%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 680px;
+      margin: 0 auto 40px;
+      font-weight: 400;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    /* Button Styling */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 99px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid var(--border);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), #4f46e5);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 4px 24px rgba(99, 102, 241, 0.3);
+    }
+    .btn-primary:hover {
+      box-shadow: 0 4px 35px rgba(99, 102, 241, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-main);
+    }
+    .btn-secondary:hover {
+      background: var(--bg-hover);
+      transform: translateY(-2px);
+    }
+
+    /* ══════════════════════════════════════════════
+       SECTION HEADERS
+       ══════════════════════════════════════════════ */
+    .section-title {
+      font-size: 36px;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    
+    .section-desc {
+      text-align: center;
+      color: var(--text-secondary);
+      max-width: 620px;
+      margin: 0 auto 56px;
+      font-size: 15px;
+    }
+
+    /* ══════════════════════════════════════════════
+       STREAM ANIMATIONS (EXPLAINING VISUALLY)
+       ══════════════════════════════════════════════ */
+    .stream-animation-box {
+      width: 120px;
+      height: 120px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 24px;
+      box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.03);
+    }
+
+    /* Science: Orbiting Atom */
+    .atom-container {
+      position: relative;
+      width: 70px; height: 70px;
+    }
+    .nucleus {
+      position: absolute;
+      top: 30px; left: 30px;
+      width: 10px; height: 10px;
+      background: var(--sci-glow);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--sci-glow);
+    }
+    .orbit {
+      position: absolute;
+      width: 70px; height: 24px;
+      border: 1.5px solid rgba(6, 182, 212, 0.35);
+      border-radius: 50%;
+      top: 23px;
+      transform: rotate(0deg);
+      animation: rotateOrbit1 6s linear infinite;
+    }
+    .orbit2 {
+      position: absolute;
+      width: 70px; height: 24px;
+      border: 1.5px solid rgba(6, 182, 212, 0.35);
+      border-radius: 50%;
+      top: 23px;
+      transform: rotate(60deg);
+      animation: rotateOrbit2 6s linear infinite;
+    }
+    .orbit3 {
+      position: absolute;
+      width: 70px; height: 24px;
+      border: 1.5px solid rgba(6, 182, 212, 0.35);
+      border-radius: 50%;
+      top: 23px;
+      transform: rotate(-60deg);
+      animation: rotateOrbit3 6s linear infinite;
+    }
+    .electron {
+      position: absolute;
+      width: 5px; height: 5px;
+      background: var(--sci-glow);
+      border-radius: 50%;
+      top: -2.5px; left: 32px;
+      box-shadow: 0 0 8px var(--sci-glow);
+    }
+    @keyframes rotateOrbit1 { 100% { transform: rotate(360deg); } }
+    @keyframes rotateOrbit2 { 100% { transform: rotate(420deg); } }
+    @keyframes rotateOrbit3 { 100% { transform: rotate(300deg); } }
+
+    /* Commerce: Shimmering Coins & Chart */
+    .commerce-anim {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      width: 60px; height: 50px;
+    }
+    .comm-bar {
+      flex: 1;
+      background: linear-gradient(to top, rgba(16, 185, 129, 0.2), var(--comm-glow));
+      border-radius: 4px;
+      animation: growBar 2s ease-in-out infinite alternate;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+    }
+    .comm-bar:nth-child(1) { height: 15px; animation-delay: 0.1s; }
+    .comm-bar:nth-child(2) { height: 30px; animation-delay: 0.3s; }
+    .comm-bar:nth-child(3) { height: 48px; animation-delay: 0.5s; }
+    @keyframes growBar {
+      0% { transform: scaleY(0.35); transform-origin: bottom; }
+      100% { transform: scaleY(1); transform-origin: bottom; }
+    }
+
+    /* Arts: Brush mixing colors */
+    .arts-anim {
+      position: relative;
+      width: 60px; height: 60px;
+    }
+    .arts-color-glow {
+      position: absolute;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--arts-glow), transparent);
+      top: 10px; left: 10px;
+      filter: blur(8px);
+      animation: colorShift 5s ease-in-out infinite alternate;
+    }
+    .palette-plate {
+      position: absolute;
+      width: 50px; height: 35px;
+      border: 2px solid rgba(236, 72, 153, 0.4);
+      border-radius: 50%;
+      top: 12px; left: 5px;
+      transform: rotate(-15deg);
+    }
+    .brush-quill {
+      position: absolute;
+      width: 4px; height: 30px;
+      background: var(--arts-glow);
+      border-radius: 2px;
+      top: 8px; left: 28px;
+      transform-origin: bottom center;
+      animation: paintMove 4s ease-in-out infinite;
+      box-shadow: 0 0 8px var(--arts-glow);
+    }
+    @keyframes colorShift {
+      0% { opacity: 0.4; transform: scale(0.8); }
+      100% { opacity: 0.9; transform: scale(1.2); }
+    }
+    @keyframes paintMove {
+      0%, 100% { transform: rotate(-25deg) translate(0, 0); }
+      50% { transform: rotate(25deg) translate(12px, -8px); }
+    }
+
+    /* Vocational: Turning Gears */
+    .gears-anim {
+      position: relative;
+      width: 60px; height: 60px;
+    }
+    .gear {
+      position: absolute;
+      border: 4px dashed var(--voc-glow);
+      border-radius: 50%;
+      animation: spinGear 8s linear infinite;
+    }
+    .gear-main {
+      width: 42px; height: 42px;
+      top: 5px; left: 5px;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
+    }
+    .gear-sub {
+      width: 28px; height: 28px;
+      bottom: 5px; right: 5px;
+      animation-direction: reverse;
+    }
+    @keyframes spinGear { 100% { transform: rotate(360deg); } }
+
+    /* ══════════════════════════════════════════════
+       THE 10TH CROSSROADS (TABS)
+       ══════════════════════════════════════════════ */
+    .tabs-nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 40px;
+      background: rgba(13, 17, 34, 0.6);
+      padding: 8px;
+      border-radius: 99px;
+      border: 1px solid var(--border);
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .tab-btn {
+      padding: 12px 28px;
+      border-radius: 99px;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tab-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .tab-btn.active {
+      color: #fff;
+    }
+
+    .tab-btn.active[data-tab="science"] { background: var(--sci-glow); box-shadow: 0 0 20px rgba(6, 182, 212, 0.4); }
+    .tab-btn.active[data-tab="commerce"] { background: var(--comm-glow); box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); }
+    .tab-btn.active[data-tab="arts"] { background: var(--arts-glow); box-shadow: 0 0 20px rgba(236, 72, 153, 0.4); }
+    .tab-btn.active[data-tab="diploma"] { background: var(--voc-glow); box-shadow: 0 0 20px rgba(245, 158, 11, 0.4); }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes slideUpFade {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ──── 3D Stream Cards ──── */
+    .stream-card {
+      background: var(--bg-panel);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 48px;
+      display: flex;
+      flex-direction: row;
+      gap: 48px;
+      align-items: center;
+      transition: var(--transition);
+      transform-style: preserve-3d;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .stream-card:hover {
+      transform: translateY(-6px) rotateX(2deg) rotateY(-2deg);
+      border-color: var(--border-accent);
+      box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15), 0 0 30px rgba(0,0,0,0.8);
+    }
+
+    .stream-details-panel {
+      flex: 1.2;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .stream-illustration-panel {
+      flex: 0.8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 30px;
+    }
+
+    .stream-badge {
+      padding: 5px 14px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 700;
+      width: fit-content;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stream-card[data-stream="science"] .stream-badge { background: rgba(6, 182, 212, 0.15); color: var(--sci-glow); border: 1px solid rgba(6, 182, 212, 0.3); }
+    .stream-card[data-stream="commerce"] .stream-badge { background: rgba(16, 185, 129, 0.15); color: var(--comm-glow); border: 1px solid rgba(16, 185, 129, 0.3); }
+    .stream-card[data-stream="arts"] .stream-badge { background: rgba(236, 72, 153, 0.15); color: var(--arts-glow); border: 1px solid rgba(236, 72, 153, 0.3); }
+    .stream-card[data-stream="diploma"] .stream-badge { background: rgba(245, 158, 11, 0.15); color: var(--voc-glow); border: 1px solid rgba(245, 158, 11, 0.3); }
+
+    .stream-title {
+      font-size: 32px;
+      font-family: var(--font-display);
+    }
+
+    .stream-desc {
+      color: var(--text-secondary);
+      font-size: 16px;
+    }
+
+    .subject-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .subject-tag {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* ──── Simple Visual Value Cards ──── */
+    .stream-value-container {
+      width: 100%;
+      margin-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 20px;
+    }
+
+    .value-row {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .value-item {
+      display: flex;
+      gap: 16px;
+    }
+
+    .value-icon {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .stream-card[data-stream="science"] .value-icon { background: rgba(6, 182, 212, 0.1); color: var(--sci-glow); }
+    .stream-card[data-stream="commerce"] .value-icon { background: rgba(16, 185, 129, 0.1); color: var(--comm-glow); }
+    .stream-card[data-stream="arts"] .value-icon { background: rgba(236, 72, 153, 0.1); color: var(--arts-glow); }
+    .stream-card[data-stream="diploma"] .value-icon { background: rgba(245, 158, 11, 0.1); color: var(--voc-glow); }
+
+    .value-details h4 {
+      font-size: 15px;
+      margin-bottom: 4px;
+      font-family: var(--font-body);
+      font-weight: 600;
+    }
+    .value-details p {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+    }
+
+    /* ══════════════════════════════════════════════
+       HIGHER EDUCATION ROADMAP (3D DECK)
+       ══════════════════════════════════════════════ */
+    .roadmap-section {
+      padding: 100px 0;
+    }
+
+    .roadmap-grid {
+      display: flex;
+      flex-direction: row;
+      gap: 24px;
+    }
+
+    .roadmap-card {
+      flex: 1;
+      background: var(--bg-panel);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .roadmap-card:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-8px) rotateX(3deg) rotateY(-3deg);
+      box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15), 0 0 30px rgba(0,0,0,0.8);
+    }
+
+    .roadmap-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+    }
+
+    .roadmap-card.science::before { background: var(--sci-glow); }
+    .roadmap-card.commerce::before { background: var(--comm-glow); }
+    .roadmap-card.arts::before { background: var(--arts-glow); }
+
+    .roadmap-header {
+      margin-bottom: 28px;
+    }
+
+    .roadmap-icon {
+      font-size: 36px;
+      margin-bottom: 16px;
+    }
+
+    .roadmap-title {
+      font-size: 24px;
+      margin-bottom: 6px;
+    }
+
+    .roadmap-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .roadmap-paths {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .path-category {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      padding-bottom: 16px;
+    }
+
+    .path-category:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .path-category h4 {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 12px;
+    }
+
+    .path-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .path-link-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13.5px;
+      font-weight: 500;
+    }
+    
+    .path-link-item span:first-child {
+      color: var(--text-main);
+    }
+
+    .path-link-item span:last-child {
+      color: var(--text-secondary);
+      font-size: 11px;
+      background: rgba(255,255,255,0.03);
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    /* ══════════════════════════════════════════════
+       INTERACTIVE STREAM APTITUDE MATCHER
+       ══════════════════════════════════════════════ */
+    .finder-section {
+      padding: 40px 0 100px;
+    }
+
+    .finder-wrapper {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.03), rgba(6, 182, 212, 0.03));
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius);
+      padding: 60px 48px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .finder-intro h3 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    .finder-intro p {
+      color: var(--text-secondary);
+      font-size: 14.5px;
+      margin-bottom: 40px;
+    }
+
+    .finder-questions {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-align: left;
+    }
+
+    .quiz-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      padding: 24px;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+      cursor: pointer;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      position: relative;
+    }
+
+    .quiz-card:hover {
+      background: rgba(255, 255, 255, 0.02);
+      border-color: rgba(255, 255, 255, 0.12);
+      transform: scale(1.01);
+    }
+
+    .quiz-card.selected {
+      border-color: var(--primary);
+      background: rgba(99, 102, 241, 0.06);
+    }
+
+    .quiz-checkbox {
+      width: 22px; height: 22px;
+      border-radius: 6px;
+      border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    .quiz-card.selected .quiz-checkbox {
+      background: var(--primary);
+      border-color: var(--primary);
+      box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+    }
+
+    .quiz-card.selected .quiz-checkbox::after {
+      content: '✓';
+      color: #fff;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .quiz-text h4 {
+      font-size: 16px;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+    .quiz-text p {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+    }
+
+    .finder-btn {
+      margin-top: 40px;
+    }
+
+    .result-container {
+      display: none;
+      margin-top: 48px;
+      animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px dashed var(--border-accent);
+      padding: 40px;
+      border-radius: var(--radius-sm);
+    }
+
+    .result-heading {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .result-stream-name {
+      font-size: 36px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .result-desc {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* ══════════════════════════════════════════════
+       ENTRANCE EXAMS INFO DICTIONARY
+       ══════════════════════════════════════════════ */
+    .exams-section {
+      padding-bottom: 120px;
+    }
+
+    .exams-grid {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .exam-card {
+      flex: 1 1 calc(50% - 24px);
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: var(--transition);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .exam-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .exam-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .exam-name {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .exam-stream-tag {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 99px;
+    }
+
+    .exam-stream-tag.sci { background: rgba(6, 182, 212, 0.15); color: var(--sci-glow); }
+    .exam-stream-tag.comm { background: rgba(16, 185, 129, 0.15); color: var(--comm-glow); }
+    .exam-stream-tag.arts { background: rgba(236, 72, 153, 0.15); color: var(--arts-glow); }
+
+    .exam-details {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .exam-meta {
+      display: flex;
+      gap: 16px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      padding-top: 12px;
+    }
+
+    /* ══════════════════════════════════════════════
+       RESPONSIVE DESIGN (Flexbox Wrappers)
+       ══════════════════════════════════════════════ */
+    @media (max-width: 992px) {
+      .stream-card { flex-direction: column; gap: 32px; padding: 36px; }
+      .roadmap-grid { flex-direction: column; }
+      .exams-grid { flex-direction: column; }
+      .exam-card { flex: 1 1 100%; }
+    }
+
+    @media (max-width: 768px) {
+      .hero-title { font-size: 40px; }
+      .tabs-nav { border-radius: var(--radius-sm); width: 100%; padding: 4px; }
+      .tab-btn { flex: 1 1 45%; text-align: center; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Starry Background Canvas ── -->
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- ── Header/Branding ── -->
+  <header style="padding: 24px 0; border-bottom: 1px solid var(--border); background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(12px);">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+      <h2 style="font-family: var(--font-display); font-size: 22px; font-weight: 700; color: #fff;">
+        Edu<span style="color: var(--primary);">Pathway</span>
+      </h2>
+      <a href="#finder" class="btn btn-secondary btn-sm">Aptitude Matcher</a>
+    </div>
+  </header>
+
+  <!-- ── Hero Section ── -->
+  <section class="hero reveal">
+    <div class="container">
+      <span class="badge">Comprehensive Career Navigator</span>
+      <h1 class="hero-title">Navigate Your Career<br>After Schooling</h1>
+      <p class="hero-subtitle">
+        Explore secondary academic streams, vocational courses, entry timelines, and direct benefits mapped out for students and parents.
+      </p>
+      <div class="hero-actions">
+        <a href="#crossroads" class="btn btn-primary">Choose After 10th</a>
+        <a href="#roadmap" class="btn btn-secondary">Explore After 12th</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Section: Crossroads (After 10th) ── -->
+  <section class="container reveal" id="crossroads" style="padding-top: 40px; padding-bottom: 100px;">
+    <h2 class="section-title">The Crossroads: Choices after Class 10</h2>
+    <p class="section-desc">
+      Your stream in Class 11 forms the bedrock of your working career. Review key subjects, see the visual stream symbols, and check what each path is actually worth.
+    </p>
+
+    <!-- Tab Navigation -->
+    <div class="tabs-nav">
+      <button class="tab-btn active" data-tab="science">🌊 Science Stream</button>
+      <button class="tab-btn" data-tab="commerce">📈 Commerce Stream</button>
+      <button class="tab-btn" data-tab="arts">🎨 Arts &amp; Humanities</button>
+      <button class="tab-btn" data-tab="diploma">🛠️ Polytechnic &amp; Vocational</button>
+    </div>
+
+    <!-- Tab: Science -->
+    <div class="tab-content active" id="science">
+      <div class="stream-card" data-stream="science">
+        <div class="stream-details-panel">
+          <span class="stream-badge">Technical &amp; Medical</span>
+          <h3 class="stream-title">The Science Stream</h3>
+          <p class="stream-desc">
+            Science studies the physical world through experiment and math. You can choose PCM (Maths-heavy) or PCB (Biology/Medical-heavy).
+          </p>
+          <div class="subject-list">
+            <span class="subject-tag">Physics</span>
+            <span class="subject-tag">Chemistry</span>
+            <span class="subject-tag">Mathematics</span>
+            <span class="subject-tag">Biology</span>
+            <span class="subject-tag">Computer Science</span>
+          </div>
+
+          <div class="stream-value-container">
+            <h4 style="font-size: 16px; margin-bottom: 14px;">Value &amp; Career Impact (What it yields):</h4>
+            <div class="value-row">
+              <div class="value-item">
+                <div class="value-icon">💵</div>
+                <div class="value-details">
+                  <h4>High Earning Potential</h4>
+                  <p>Leads to engineering, software, and surgery roles which are globally among the highest paid sectors.</p>
+                </div>
+              </div>
+              <div class="value-item">
+                <div class="value-icon">🏥</div>
+                <div class="value-details">
+                  <h4>Societal Support &amp; Health</h4>
+                  <p>Allows you to work in clinics, research centers, and pharmaceutical factories saving human lives.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="stream-illustration-panel">
+          <div class="stream-animation-box">
+            <div class="atom-container">
+              <div class="nucleus"></div>
+              <div class="orbit"><div class="electron"></div></div>
+              <div class="orbit2"><div class="electron"></div></div>
+              <div class="orbit3"><div class="electron"></div></div>
+            </div>
+          </div>
+          <span style="font-size: 12px; font-weight: 700; color: var(--sci-glow); letter-spacing: 0.5px;">SCIENCE DYNAMICS</span>
+          <p style="font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 4px;">Atoms, code syntax, and biological molecules.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Commerce -->
+    <div class="tab-content" id="commerce">
+      <div class="stream-card" data-stream="commerce">
+        <div class="stream-details-panel">
+          <span class="stream-badge">Business &amp; Finance</span>
+          <h3 class="stream-title">The Commerce Stream</h3>
+          <p class="stream-desc">
+            Commerce studies cash flows, economics, corporate taxation, accounting, and business laws.
+          </p>
+          <div class="subject-list">
+            <span class="subject-tag">Accountancy</span>
+            <span class="subject-tag">Business Studies</span>
+            <span class="subject-tag">Economics</span>
+            <span class="subject-tag">Mathematics</span>
+            <span class="subject-tag">Informatics Practices</span>
+          </div>
+
+          <div class="stream-value-container">
+            <h4 style="font-size: 16px; margin-bottom: 14px;">Value &amp; Career Impact (What it yields):</h4>
+            <div class="value-row">
+              <div class="value-item">
+                <div class="value-icon">⚖️</div>
+                <div class="value-details">
+                  <h4>Business Fluency &amp; Store Planning</h4>
+                  <p>Teaches you how to start a business or lead companies, budget resources, and invest capital.</p>
+                </div>
+              </div>
+              <div class="value-item">
+                <div class="value-icon">💼</div>
+                <div class="value-details">
+                  <h4>Professional Stability</h4>
+                  <p>Guarantees corporate roles in CA (Chartered Accountancy), bank management, and audits. Companies always need accountants!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stream-illustration-panel">
+          <div class="stream-animation-box">
+            <div class="commerce-anim">
+              <div class="comm-bar"></div>
+              <div class="comm-bar"></div>
+              <div class="comm-bar"></div>
+            </div>
+          </div>
+          <span style="font-size: 12px; font-weight: 700; color: var(--comm-glow); letter-spacing: 0.5px;">COMMERCE GRAPH</span>
+          <p style="font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 4px;">Wealth growth, audits, and marketing metrics.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Arts -->
+    <div class="tab-content" id="arts">
+      <div class="stream-card" data-stream="arts">
+        <div class="stream-details-panel">
+          <span class="stream-badge">Humanities &amp; Media</span>
+          <h3 class="stream-title">Arts &amp; Humanities</h3>
+          <p class="stream-desc">
+            Humanities focus on human history, literature, laws, political structures, design, and counseling psychology.
+          </p>
+          <div class="subject-list">
+            <span class="subject-tag">History</span>
+            <span class="subject-tag">Political Science</span>
+            <span class="subject-tag">Geography</span>
+            <span class="subject-tag">Psychology</span>
+            <span class="subject-tag">Fine Arts</span>
+          </div>
+
+          <div class="stream-value-container">
+            <h4 style="font-size: 16px; margin-bottom: 14px;">Value &amp; Career Impact (What it yields):</h4>
+            <div class="value-row">
+              <div class="value-item">
+                <div class="value-icon">⚖️</div>
+                <div class="value-details">
+                  <h4>Administrative &amp; Legal Power</h4>
+                  <p>Primary path leading to Civil Services (IAS/IPS officers) and corporate or civil court judges (Law).</p>
+                </div>
+              </div>
+              <div class="value-item">
+                <div class="value-icon">✍️</div>
+                <div class="value-details">
+                  <h4>Creative Autonomy</h4>
+                  <p>Provides pathways for journalism, advertising agencies, visual interface design, and literary writing.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stream-illustration-panel">
+          <div class="stream-animation-box">
+            <div class="arts-anim">
+              <div class="arts-color-glow"></div>
+              <div class="palette-plate"></div>
+              <div class="brush-quill"></div>
+            </div>
+          </div>
+          <span style="font-size: 12px; font-weight: 700; color: var(--arts-glow); letter-spacing: 0.5px;">HUMANITIES palette</span>
+          <p style="font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 4px;">Creative design, social theories, and media.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Diploma -->
+    <div class="tab-content" id="diploma">
+      <div class="stream-card" data-stream="diploma">
+        <div class="stream-details-panel">
+          <span class="stream-badge">Skill &amp; Career Focus</span>
+          <h3 class="stream-title">Polytechnic &amp; Vocational Paths</h3>
+          <p class="stream-desc">
+            Skip general schooling classes and focus on 3-year technical diplomas or vocational trade courses (ITI) that teach actual mechanical works.
+          </p>
+          <div class="subject-list">
+            <span class="subject-tag">Diploma Engineering</span>
+            <span class="subject-tag">ITI Technical Trades</span>
+            <span class="subject-tag">Computer Assembly</span>
+            <span class="subject-tag">Nursing Assistant</span>
+          </div>
+
+          <div class="stream-value-container">
+            <h4 style="font-size: 16px; margin-bottom: 14px;">Value &amp; Career Impact (What it yields):</h4>
+            <div class="value-row">
+              <div class="value-item">
+                <div class="value-icon">🔧</div>
+                <div class="value-details">
+                  <h4>Fast Earning Capabilities</h4>
+                  <p>Allows teenagers to learn technical repair/operation skills and start earning wages within 1 to 3 years.</p>
+                </div>
+              </div>
+              <div class="value-item">
+                <div class="value-icon">🛠️</div>
+                <div class="value-details">
+                  <h4>Practical Trade Skills</h4>
+                  <p>Prepares you directly for hands-on, vital jobs: electricians, software testers, surveyors, and mechanic shop owners.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stream-illustration-panel">
+          <div class="stream-animation-box">
+            <div class="gears-anim">
+              <div class="gear gear-main"></div>
+              <div class="gear gear-sub"></div>
+            </div>
+          </div>
+          <span style="font-size: 12px; font-weight: 700; color: var(--voc-glow); letter-spacing: 0.5px;">VOCATIONAL GEARS</span>
+          <p style="font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 4px;">Machinery operations, welding, and circuitry.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Section: Higher Education Roadmap (After 12th) ── -->
+  <section class="roadmap-section reveal" id="roadmap" style="background: rgba(7, 8, 15, 0.7); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <h2 class="section-title">The Higher Education Roadmap</h2>
+      <p class="section-desc">
+        Explore what degree options open up after you complete your schooling (Class 12) across the primary academic tracks.
+      </p>
+
+      <div class="roadmap-grid">
+        <!-- Science Roadmap -->
+        <div class="roadmap-card science">
+          <div class="roadmap-header">
+            <div class="roadmap-icon">🔬</div>
+            <h3 class="roadmap-title">Science Pathways</h3>
+            <span class="roadmap-subtitle">Technological, Medical &amp; Research</span>
+          </div>
+          <div class="roadmap-paths">
+            <div class="path-category">
+              <h4>Medical / Biological</h4>
+              <div class="path-links">
+                <div class="path-link-item"><span>MBBS / BDS</span> <span>5.5 Years</span></div>
+                <div class="path-link-item"><span>B.Pharm / Nursing</span> <span>4 Years</span></div>
+                <div class="path-link-item"><span>B.Sc. Biotechnology</span> <span>3 Years</span></div>
+              </div>
+            </div>
+            <div class="path-category">
+              <h4>Engineering / Tech</h4>
+              <div class="path-links">
+                <div class="path-link-item"><span>B.Tech / B.E. Computer Sci</span> <span>4 Years</span></div>
+                <div class="path-link-item"><span>B.Arch (Architecture)</span> <span>5 Years</span></div>
+                <div class="path-link-item"><span>B.Sc. Data Science / AI</span> <span>3 Years</span></div>
+              </div>
+            </div>
+            <div class="path-category">
+              <h4>Pure Sciences</h4>
+              <div class="path-links">
+                <div class="path-link-item"><span>B.Sc. Physics / Chem / Math</span> <span>3 Years</span></div>
+                <div class="path-link-item"><span>BS-MS (IISER / IISc)</span> <span>5 Years</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Commerce Roadmap -->
+        <div class="roadmap-card commerce">
+          <div class="roadmap-header">
+            <div class="roadmap-icon">📈</div>
+            <h3 class="roadmap-title">Commerce Pathways</h3>
+            <span class="roadmap-subtitle">Finance, Business &amp; Operations</span>
+          </div>
+          <div class="roadmap-paths">
+            <div class="path-category">
+              <h4>Financial Degrees</h4>
+              <div class="path-links">
+                <div class="path-link-item"><span>B.Com (Honours)</span> <span>3 Years</span></div>
+                <div class="path-link-item"><span>B.Com Accounting &amp; Fin</span> <span>3 Years</span></div>
+                <div class="path-link-item"><span>B.Sc. Finance / Economics</span> <span>3-4 Years</span></div>
+              </div>
+            </div>
+            <div class="path-category">
+              <h4>Professional Roles</h4>
+              <div class="path-links">
+                <div class="path-link-item"><span>Chartered Accountant (CA)</span> <span>Post-12th Route</span></div>
+                <div class="path-link-item"><span>Company Secretary (CS)</span> <span>Certification</span></div>
+                <div class="path-link-item"><span>CMA / CFA</span> <span>Global Cert</span></div>
+              </div>
+            </div>
+            <div class="path-category">
+              <h4>Management</h4>
+              <div class="path-links">
+                <div class="path-link-item"><span>BBA (Business Admin)</span> <span>3 Years</span></div>
+                <div class="path-link-item"><span>BMS (Management Studies)</span> <span>3 Years</span></div>
+                <div class="path-link-item"><span>Integrated MBA (IPM)</span> <span>5 Years</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Arts Roadmap -->
+        <div class="roadmap-card arts">
+          <div class="roadmap-header">
+            <div class="roadmap-icon">🎨</div>
+            <h3 class="roadmap-title">Humanities Pathways</h3>
+            <span class="roadmap-subtitle">Legal, Creative, Civic &amp; Social</span>
+          </div>
+          <div class="roadmap-paths">
+            <div class="path-category">
+              <h4>Law &amp; Humanities</h4>
+              <div class="path-links">
+                <div class="path-link-item"><span>BA LLB (Integrated Law)</span> <span>5 Years</span></div>
+                <div class="path-link-item"><span>BA (Hons) Psychology / Lit</span> <span>3 Years</span></div>
+                <div class="path-link-item"><span>B.Ed. (Teacher Training)</span> <span>2-4 Years</span></div>
+              </div>
+            </div>
+            <div class="path-category">
+              <h4>Creative / Design</h4>
+              <div class="path-links">
+                <div class="path-link-item"><span>B.Des (Product/Fashion)</span> <span>4 Years</span></div>
+                <div class="path-link-item"><span>BFA (Fine Arts)</span> <span>4 Years</span></div>
+                <div class="path-link-item"><span>B.Sc. Animation / VFX</span> <span>3 Years</span></div>
+              </div>
+            </div>
+            <div class="path-category">
+              <h4>Media &amp; Public Policy</h4>
+              <div class="path-links">
+                <div class="path-link-item"><span>BJMC (Journalism)</span> <span>3 Years</span></div>
+                <div class="path-link-item"><span>BA Public Administration</span> <span>3 Years</span></div>
+                <div class="path-link-item"><span>B.Lib.Sc. (Library Science)</span> <span>3 Years</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Section: Aptitude Finder ── -->
+  <section class="finder-section container reveal" id="finder">
+    <div class="finder-wrapper">
+      <div class="finder-intro">
+        <span class="badge" style="background: rgba(99, 102, 241, 0.15)">Interactive Aptitude Matcher</span>
+        <h3>Find Your Recommended Stream</h3>
+        <p>Check the statements below that match your habits, strengths, and long-term targets to calculate your stream recommendation.</p>
+      </div>
+
+      <div class="finder-questions">
+        <div class="quiz-card" data-val="science">
+          <div class="quiz-checkbox"></div>
+          <div class="quiz-text">
+            <h4>"I love figuring out how things work mechanically or biologically."</h4>
+            <p>You enjoy science, gadgets, computers, coding, anatomy, or environment problems.</p>
+          </div>
+        </div>
+
+        <div class="quiz-card" data-val="science">
+          <div class="quiz-checkbox"></div>
+          <div class="quiz-text">
+            <h4>"I am comfortable spending hours solving complex mathematics or logic puzzles."</h4>
+            <p>You prefer analytical logic and quantitative data calculations.</p>
+          </div>
+        </div>
+
+        <div class="quiz-card" data-val="commerce">
+          <div class="quiz-checkbox"></div>
+          <div class="quiz-text">
+            <h4>"I am interested in stock markets, banking, and how businesses make profits."</h4>
+            <p>You enjoy reading business news, entrepreneur profiles, and math in financial contexts.</p>
+          </div>
+        </div>
+
+        <div class="quiz-card" data-val="commerce">
+          <div class="quiz-checkbox"></div>
+          <div class="quiz-text">
+            <h4>"I like managing budgets, organizing events, and planning strategies."</h4>
+            <p>You have natural leadership, operational, and organizational tendencies.</p>
+          </div>
+        </div>
+
+        <div class="quiz-card" data-val="arts">
+          <div class="quiz-checkbox"></div>
+          <div class="quiz-text">
+            <h4>"I love reading novels, debating politics, and learning about human history."</h4>
+            <p>You have strong linguistic skills and are interested in societal movements and theories.</p>
+          </div>
+        </div>
+
+        <div class="quiz-card" data-val="arts">
+          <div class="quiz-checkbox"></div>
+          <div class="quiz-text">
+            <h4>"I prefer creative expression like writing, graphic design, and content creation."</h4>
+            <p>You want a career focused on branding, photography, design, or social services.</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary finder-btn" id="btnCalculate">Calculate Recommendation</button>
+
+      <div class="result-container" id="quizResult">
+        <div class="result-heading">Suggested Academic Stream</div>
+        <div class="result-stream-name" id="resultStreamName">Science / Commerce / Arts</div>
+        <div class="result-desc" id="resultDesc">
+          Loading description...
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Section: Entrance Exams Dictionary ── -->
+  <section class="exams-section container reveal">
+    <h2 class="section-title">Major Entrance Exams After Class 12</h2>
+    <p class="section-desc">
+      To enter top universities in India, you must clear national or state entrance tests. Here are the key exams you should prepare for.
+    </p>
+
+    <div class="exams-grid">
+      <!-- Exam 1 -->
+      <div class="exam-card">
+        <div class="exam-header">
+          <span class="exam-name">JEE Main &amp; Advanced</span>
+          <span class="exam-stream-tag sci">Science (PCM)</span>
+        </div>
+        <p class="exam-details">
+          The primary gateway for engineering admissions. Clearing JEE Main grants access to NITs and IIITs, while qualifying for JEE Advanced is mandatory to secure seats in the prestigious Indian Institutes of Technology (IITs).
+        </p>
+        <div class="exam-meta">
+          <span>Subjects: Physics, Chemistry, Maths</span>
+          <span>Target: B.Tech / B.Arch</span>
+        </div>
+      </div>
+
+      <!-- Exam 2 -->
+      <div class="exam-card">
+        <div class="exam-header">
+          <span class="exam-name">NEET (UG)</span>
+          <span class="exam-stream-tag sci">Science (PCB)</span>
+        </div>
+        <p class="exam-details">
+          National Eligibility cum Entrance Test. A single-window entrance exam for admission into all medical courses (MBBS, BDS, BAMS, BHMS) across private and government colleges in India.
+        </p>
+        <div class="exam-meta">
+          <span>Subjects: Physics, Chemistry, Biology</span>
+          <span>Target: MBBS / BDS / Medical</span>
+        </div>
+      </div>
+
+      <!-- Exam 3 -->
+      <div class="exam-card">
+        <div class="exam-header">
+          <span class="exam-name">CLAT</span>
+          <span class="exam-stream-tag arts">Arts / All Streams</span>
+        </div>
+        <p class="exam-details">
+          Common Law Admission Test. Conducted for admission to 5-year integrated undergraduate law programs (BA LLB, BBA LLB) across 22 National Law Universities (NLUs) in India.
+        </p>
+        <div class="exam-meta">
+          <span>Subjects: English, GK, Legal Aptitude, Logic</span>
+          <span>Target: Law Degrees (LLB)</span>
+        </div>
+      </div>
+
+      <!-- Exam 4 -->
+      <div class="exam-card">
+        <div class="exam-header">
+          <span class="exam-name">CUET</span>
+          <span class="exam-stream-tag comm">All Streams</span>
+        </div>
+        <p class="exam-details">
+          Common University Entrance Test. Conducted for admission to all undergraduate programs in central universities (Delhi University, BHU, JNU, etc.) and participating state/private colleges.
+        </p>
+        <div class="exam-meta">
+          <span>Subjects: General Test, Language, Domain Subjects</span>
+          <span>Target: B.Sc / B.Com / BA / BBA</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer style="background: rgba(0, 0, 0, 0.9); border-top: 1px solid var(--border); padding: 48px 0; font-size: 13px; color: var(--text-muted); text-align: center;">
+    <div class="container">
+      <p>© 2026 EduPathway Career Planner. All rights reserved.</p>
+      <p style="margin-top: 6px;">Designed for students navigating schooling transitions, streams selection, and career growth.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ── Starry Background Particle Generator ──
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    const starCount = 80;
+
+    function resizeBg() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeBg);
+    resizeBg();
+
+    // Init Stars
+    for (let i = 0; i < starCount; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.5 + 0.5,
+        vx: (Math.random() - 0.5) * 0.15,
+        vy: (Math.random() - 0.5) * 0.15,
+        alpha: Math.random() * 0.6 + 0.2
+      });
+    }
+
+    function animateBg() {
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Draw faint connections
+      for (let i = 0; i < starCount; i++) {
+        for (let j = i + 1; j < starCount; j++) {
+          const dx = stars[i].x - stars[j].x;
+          const dy = stars[i].y - stars[j].y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          if (dist < 100) {
+            ctx.beginPath();
+            ctx.moveTo(stars[i].x, stars[i].y);
+            ctx.lineTo(stars[j].x, stars[j].y);
+            ctx.strokeStyle = `rgba(99, 102, 241, ${(1 - dist / 100) * 0.08})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw Stars
+      for (let s of stars) {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha})`;
+        ctx.fill();
+        s.x += s.vx;
+        s.y += s.vy;
+
+        // Wrap around boundaries
+        if (s.x < 0) s.x = canvas.width;
+        if (s.x > canvas.width) s.x = 0;
+        if (s.y < 0) s.y = canvas.height;
+        if (s.y > canvas.height) s.y = 0;
+      }
+
+      requestAnimationFrame(animateBg);
+    }
+    animateBg();
+
+    // ── Stream tab switching ──
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active class
+        tabButtons.forEach(b => b.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+
+        // Add active class
+        btn.classList.add('active');
+        const tabId = btn.dataset.tab;
+        document.getElementById(tabId).classList.add('active');
+      });
+    });
+
+    // ── Quiz Selection ──
+    const quizCards = document.querySelectorAll('.quiz-card');
+    quizCards.forEach(card => {
+      card.addEventListener('click', () => {
+        card.classList.toggle('selected');
+      });
+    });
+
+    // ── Calculate Quiz Result ──
+    const btnCalculate = document.getElementById('btnCalculate');
+    const quizResult = document.getElementById('quizResult');
+    const resultStreamName = document.getElementById('resultStreamName');
+    const resultDesc = document.getElementById('resultDesc');
+
+    btnCalculate.addEventListener('click', () => {
+      const selectedCards = document.querySelectorAll('.quiz-card.selected');
+      
+      if (selectedCards.length === 0) {
+        alert("Please select at least one statement that applies to you!");
+        return;
+      }
+
+      let scores = { science: 0, commerce: 0, arts: 0 };
+      
+      selectedCards.forEach(card => {
+        const val = card.dataset.val;
+        scores[val] = (scores[val] || 0) + 1;
+      });
+
+      // Find stream with maximum score
+      let bestStream = 'science';
+      let maxScore = -1;
+
+      for (const [stream, score] of Object.entries(scores)) {
+        if (score > maxScore) {
+          maxScore = score;
+          bestStream = stream;
+        }
+      }
+
+      // Display result
+      quizResult.style.display = 'block';
+
+      if (bestStream === 'science') {
+        resultStreamName.textContent = "🌊 Science Stream (PCM / PCB)";
+        resultStreamName.style.color = "var(--sci-glow)";
+        resultDesc.textContent = "Based on your traits, you are analytical, logical, and interested in learning how things work or solving numeric puzzles. You should consider opting for Science with Physics, Chemistry, and Mathematics (for Engineering/Technology) or Biology (for Medicine/Healthcare/Biotech).";
+      } else if (bestStream === 'commerce') {
+        resultStreamName.textContent = "📈 Commerce Stream";
+        resultStreamName.style.color = "var(--comm-glow)";
+        resultDesc.textContent = "Your interests lean towards economics, business strategy, trading, stock markets, and management. Commerce is the ideal route, leading directly to Chartered Accountancy (CA), Company Secretary (CS), BBA/MBA degrees, and venture entrepreneurship.";
+      } else {
+        resultStreamName.textContent = "🎨 Arts & Humanities";
+        resultStreamName.style.color = "var(--arts-glow)";
+        resultDesc.textContent = "You value linguistic expression, history, societal systems, or creative design fields. Humanities will nurture your critical reasoning, leading to careers in Civil Services (IAS/IPS), Corporate/Civil Law, Product Design, Journalism, or Psychology.";
+      }
+
+      // Smooth scroll to results
+      quizResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    // ── Intersection Observer for Lazy Reveals ──
+    const revealElements = document.querySelectorAll('.reveal');
+    const observerOptions = {
+      root: null,
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    };
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    revealElements.forEach(el => revealObserver.observe(el));
+  </script>
+</body>
+</html>

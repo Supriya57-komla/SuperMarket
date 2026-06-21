@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Environment variables (contains DB passwords - NEVER commit this)
+.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files
+test_*.js
+find_*.js
+
+# Personal files
+*.pdf
+*.jpeg
+*.pdf
+passportSizePhoto.jpeg
+portfolioimage.jpeg
