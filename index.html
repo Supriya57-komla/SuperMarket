@@ -156,18 +156,18 @@
     .nav-icon-btn:hover { background: var(--s200); color: var(--s800); }
     .nav-badge { position: absolute; top: 4px; right: 4px; min-width: 16px; height: 16px; border-radius: 50%; background: var(--g500); color: #fff; font-size: 9px; font-weight: 900; display: flex; align-items: center; justify-content: center; border: 2px solid var(--s50); }
     /* HERO WRAPPER */
-    .hero-wrapper { position: relative; width: 100%; height: 280px; overflow: hidden; margin-bottom: 0; box-shadow: var(--shadow-md); z-index: 1; }
-    @media(max-width: 767px) { .hero-wrapper { height: 240px; } }
+    .hero-wrapper { position: relative; width: 100%; height: auto; min-height: 280px; overflow: hidden; margin-bottom: 0; box-shadow: var(--shadow-md); z-index: 1; }
+    @media(max-width: 767px) { .hero-wrapper { min-height: 240px; } }
     
     /* HERO SLIDER */
-    .hero-right { position: relative; width: 100%; height: 100%; overflow: hidden; background: #0f172a; }
-    .hero-slide { position: absolute; inset: 0; opacity: 0; transition: opacity .8s cubic-bezier(.4,0,.2,1); display: flex; align-items: center; }
-    .hero-slide.active { opacity: 1; z-index: 2; }
+    .hero-right { position: relative; width: 100%; height: auto; min-height: 100%; overflow: hidden; background: #0f172a; }
+    .hero-slide { position: absolute; inset: 0; opacity: 0; transition: opacity .8s cubic-bezier(.4,0,.2,1); display: flex; align-items: center; pointer-events: none; }
+    .hero-slide.active { position: relative; opacity: 1; z-index: 2; pointer-events: auto; }
     .hero-slide img.slide-bg, .hero-slide video.slide-bg-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
     .slide-overlay { position: absolute; inset: 0; z-index: 1; }
     
     /* TAI STYLES */
-    .hero-content-wrap { position: relative; z-index: 2; padding: 20px 40px; width: 100%; height: 100%; max-width: 1440px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; box-sizing: border-box; gap: 40px; }
+    .hero-content-wrap { position: relative; z-index: 2; padding: 20px 40px; width: 100%; height: auto; min-height: 100%; max-width: 1440px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; box-sizing: border-box; gap: 40px; }
     @media(max-width: 767px) {
       .hero-content-wrap { flex-direction: column; justify-content: center; align-items: flex-start; padding: 20px; gap: 16px; }
     }
@@ -559,7 +559,8 @@
         padding: 10px 12px;
       }
       .hero-wrapper {
-        height: 220px !important;
+        height: auto !important;
+        min-height: 220px !important;
       }
       .slide-p {
         display: none !important;
