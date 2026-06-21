@@ -29,6 +29,7 @@
     }
     html { scroll-behavior: smooth; }
     body { font-family: 'Inter', sans-serif; background: var(--s50); color: var(--s800); min-height: 100vh; transition: background .25s, color .25s; overflow-x: hidden; }
+    #storefront { width: 100% !important; max-width: 100% !important; margin: 0 !important; padding: 0 !important; overflow-x: hidden !important; }
     html.dark {
       --s50: #0b0f19; --s100: #131b2e; --s200: #1e293b; --s300: #334155;
       --s400: #64748b; --s500: #94a3b8; --s600: #cbd5e1; --s700: #e2e8f0;
@@ -156,14 +157,28 @@
     .nav-icon-btn:hover { background: var(--s200); color: var(--s800); }
     .nav-badge { position: absolute; top: 4px; right: 4px; min-width: 16px; height: 16px; border-radius: 50%; background: var(--g500); color: #fff; font-size: 9px; font-weight: 900; display: flex; align-items: center; justify-content: center; border: 2px solid var(--s50); }
     /* HERO WRAPPER */
-    .hero-wrapper { position: relative; width: 100%; height: auto; min-height: 280px; overflow: hidden; margin-bottom: 0; box-shadow: var(--shadow-md); z-index: 1; }
-    @media(max-width: 767px) { .hero-wrapper { min-height: 240px; } }
+    .hero-wrapper { position: relative; width: 100% !important; max-width: 100% !important; height: auto; min-height: 280px; overflow: hidden !important; margin: 0 !important; padding: 0 !important; box-shadow: var(--shadow-md); z-index: 1; }
+    @media(max-width: 767px) {
+      .hero-wrapper {
+        min-height: 240px;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .hero-right {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+    }
     
     /* HERO SLIDER */
-    .hero-right { position: relative; width: 100%; height: auto; min-height: 100%; overflow: hidden; background: #0f172a; }
-    .hero-slide { position: absolute; inset: 0; opacity: 0; transition: opacity .8s cubic-bezier(.4,0,.2,1); display: flex; align-items: center; pointer-events: none; }
-    .hero-slide.active { position: relative; opacity: 1; z-index: 2; pointer-events: auto; }
-    .hero-slide img.slide-bg, .hero-slide video.slide-bg-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+    .hero-right { position: relative; width: 100% !important; max-width: 100% !important; height: auto; min-height: 100%; overflow: hidden; background: #0f172a; margin: 0 !important; padding: 0 !important; }
+    .hero-slide { position: absolute; inset: 0; width: 100% !important; max-width: 100% !important; height: 100%; opacity: 0; transition: opacity .8s cubic-bezier(.4,0,.2,1); display: flex; align-items: center; pointer-events: none; margin: 0 !important; padding: 0 !important; }
+    .hero-slide.active { position: relative; width: 100% !important; max-width: 100% !important; opacity: 1; z-index: 2; pointer-events: auto; }
+    .hero-slide img.slide-bg, .hero-slide video.slide-bg-video { position: absolute; inset: 0; width: 100% !important; height: 100% !important; object-fit: cover !important; z-index: 0; }
     .slide-overlay { position: absolute; inset: 0; z-index: 1; }
     
     /* TAI STYLES */
